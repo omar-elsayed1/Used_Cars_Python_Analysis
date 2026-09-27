@@ -1,9 +1,9 @@
-pandas
-numpy
-matplotlib
-seaborn
-scipy
-scikit-learn
-statsmodels
-jupyter
-pytest
+# Dependency versions are defined in pyproject.toml so there's a single source
+# of truth. Install the package with its dev/notebook extras instead of
+# maintaining a second, separately-versioned list here:
+#
+#   python -m pip install -e ".[dev]"
+#
+# `pip install -r requirements.txt` still works because this file just points
+# back at that same install command.
+-e .[dev]
