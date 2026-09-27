@@ -39,13 +39,33 @@ def test_correlation_output_contains_selling_price(sample_data):
     assert "selling_price" in corr.index
     assert "car_age" in corr.index
 
-def test_transmission_test_returns_expected_metrics(sample_data):
-    featured = add_features(clean_data(sample_data))
-    results = transmission_price_test(featured)
+def test_transmission_test_returns_expected_metrics():
+    # 3 manual rows, 2 automatic rows, with automatic priced strictly higher,
+    # so the expected direction and magnitude of every metric is known.
+    df = pd.DataFrame({
+        "selling_price": [400000, 500000, 600000, 900000, 1100000],
+        "transmission": ["Manual", "Manual", "Manual", "Automatic", "Automatic"],
+    })
+
+    results = transmission_price_test(df)
+
     expected_keys = [
-        "manual_sample_size", "automatic_sample_size", 
-        "manual_mean_price", "automatic_mean_price", 
+        "manual_sample_size", "automatic_sample_size",
+        "manual_mean_price", "automatic_mean_price",
         "welch_t_statistic", "p_value", "cohens_d"
     ]
     for key in expected_keys:
         assert key in results
+
+    # Sample sizes must map to the correct transmission type, not be swapped.
+    assert results["manual_sample_size"] == 3
+    assert results["automatic_sample_size"] == 2
+
+    # Mean prices must match their own group, not the other group's.
+    assert results["manual_mean_price"] == pytest.approx(500000)
+    assert results["automatic_mean_price"] == pytest.approx(1000000)
+
+    # Automatic vehicles are priced higher in this sample, so both the
+    # t-statistic and Cohen's d should be positive (automatic - manual).
+    assert results["welch_t_statistic"] > 0
+    assert results["cohens_d"] == pytest.approx(4.330127, rel=1e-4)
