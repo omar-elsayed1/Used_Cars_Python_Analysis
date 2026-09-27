@@ -5,9 +5,9 @@ Modular Python data pipeline and analysis suite exploring depreciation, transmis
 
 ## Setup Instructions
 ```bash
-# Install dependencies
-python -m pip install -r requirements.txt
-python -m pip install -e .
+# Install the package (with Jupyter and pytest) in editable mode.
+# All dependency versions live in pyproject.toml.
+python -m pip install -e ".[dev]"
 
 # Run tests
 python -m pytest
@@ -22,4 +22,4 @@ Run the notebooks in order from the project root:
 3. `notebooks/03_statistical_analysis.ipynb` runs hypothesis tests and regression.
 4. `notebooks/04_executive_conclusions.ipynb` summarizes the main business findings.
 
-The cleaned dataset is written to `data/cleaned_car_data.csv` by the first notebook.
+The cleaned dataset is written to `data/cleaned_car_data.csv` by the first notebook. Charts produced by notebooks 2 and 3 are saved to `images/generated/` (not tracked in git; regenerated each run).
