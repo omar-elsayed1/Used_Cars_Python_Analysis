@@ -1,51 +1,25 @@
-# Used_Cars_Python_Analysis
+# Used Cars Price & Market Analysis
 
-A professional Python data analysis project template for exploring and understanding used cars datasets.
+## Project Overview
+Modular Python data pipeline and analysis suite exploring depreciation, transmission premiums, and seller behaviors in used car markets.
 
-## Project Structure
+## Setup Instructions
+```bash
+# Install dependencies
+python -m pip install -r requirements.txt
+python -m pip install -e .
 
-```text
-Used_Cars_Python_Analysis/
-├── data/
-│   └── .gitkeep
-├── notebooks/
-│   └── .gitkeep
-├── images/
-│   └── .gitkeep
-├── src/
-│   └── .gitkeep
-├── .gitignore
-├── requirements.txt
-└── README.md
+# Run tests
+python -m pytest
 ```
 
-## Tools and Libraries
+## Analysis Workflow
 
-- Python
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scipy
-- scikit-learn
-- jupyter
+Run the notebooks in order from the project root:
 
-## Data Cleaning
+1. `notebooks/01_data_inspection.ipynb` loads and cleans the raw CSV.
+2. `notebooks/02_exploratory_data_analysis.ipynb` explores distributions and relationships.
+3. `notebooks/03_statistical_analysis.ipynb` runs hypothesis tests and regression.
+4. `notebooks/04_executive_conclusions.ipynb` summarizes the main business findings.
 
-_This section will document data cleaning steps._
-
-## Exploratory Data Analysis (EDA)
-
-_This section will summarize exploratory analysis and visual insights._
-
-## Statistical Analysis
-
-_This section will document statistical methods and results._
-
-## Key Findings
-
-_This section will highlight major findings from the analysis._
-
-## Future Improvements
-
-_This section will outline possible next steps and enhancements._
+The cleaned dataset is written to `data/cleaned_car_data.csv` by the first notebook.

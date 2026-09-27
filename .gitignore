@@ -12,6 +12,9 @@ ENV/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
+# Generated analysis data
+data/cleaned_car_data.csv
+
 # VS Code
 .vscode/
 
