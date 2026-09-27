@@ -17,14 +17,17 @@ def transmission_price_test(df: pd.DataFrame) -> dict:
     
     t_stat, p_val = stats.ttest_ind(automatic, manual, equal_var=False)
     
-    n1, n2 = len(automatic), len(manual)
-    s1, s2 = automatic.std(), manual.std()
-    s_pooled = np.sqrt(((n1 - 1) * s1**2 + (n2 - 1) * s2**2) / (n1 + n2 - 2))
+    n_manual, n_automatic = len(manual), len(automatic)
+    std_manual, std_automatic = manual.std(), automatic.std()
+    s_pooled = np.sqrt(
+        ((n_automatic - 1) * std_automatic**2 + (n_manual - 1) * std_manual**2)
+        / (n_automatic + n_manual - 2)
+    )
     cohens_d = (automatic.mean() - manual.mean()) / s_pooled
     
     return {
-        "manual_sample_size": n1,
-        "automatic_sample_size": n2,
+        "manual_sample_size": n_manual,
+        "automatic_sample_size": n_automatic,
         "manual_mean_price": float(manual.mean()),
         "automatic_mean_price": float(automatic.mean()),
         "welch_t_statistic": float(t_stat),
